@@ -60,7 +60,8 @@ require(
     });
 
     function cargar(_params_url){
-      console.log(_params_url); 
+      console.log("parametro",_params_url); 
+
       var cod_dist  = _params_url.split('=')[1];
       cargarDatos(cod_dist);
     } 

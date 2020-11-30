@@ -60,8 +60,6 @@ require(
     });
 
     function cargar(_params_url){
-      _params_url = "cod_dist=150107";
-      console.log(_params_url);
       var cod_dist  = _params_url.split('=')[1];
       cargarDatos(cod_dist);
     } 

@@ -7,6 +7,7 @@ require(
     "esri/tasks/support/Query",
     "esri/core/watchUtils",
     "dojo/_base/array",  
+    "esri/core/urlUtils",
           
     "dojo/domReady!"
   ],
@@ -17,16 +18,16 @@ require(
     QueryTask,
     Query,
     watchUtils,
-    array
+    array,
+    urlUtils
   ){
   $("#mensaje").hide();
 
-    _proxyurl = "http://localhost/Osinergmin/Prod05_v2/proxy_php/proxy.php";
+    _proxyurl2 = "https://proxy-esri.herokuapp.com/proxy.php"; //palomino
 
-    // AUTENTICACIÓN
     urlUtils.addProxyRule({
-      urlPrefix: "https://gisem.osinergmin.gob.pe/serverdc/rest/services/",
-      proxyUrl: _proxyurl
+      urlPrefix: "https://gisem.osinergmin.gob.pe/serverdc/rest/services",
+      proxyUrl: _proxyurl2
     });
     //servicio prueba
     //var url_prueba = "https://services6.arcgis.com/qHdoJI2FoNfsEzow/ArcGIS/rest/services/tabla_servicio_dash/FeatureServer/0";
@@ -122,7 +123,7 @@ require(
             exportar(cod_dist);
           }else{
             var registros = response.features;
-            var tabla = $("#tbl_datos").html("");
+            var tabla = $("#tbl_datos");
             for (var i = 0; i < registros.length; i++) {
               var atributos = registros[i].attributes;
               var departamento = atributos[fnombdepart];
@@ -143,11 +144,11 @@ require(
                               <td>${rsocial}</td>
                               <td>${direccion}</td>
                               <td>${actividad}</td>
-                              <td>SI</td>
+                              <td>EN PROCESO</td>
                             </tr>`);
             }
           }
-          //exportar(distrito);
+          exportar(distrito);
         })
     }
 

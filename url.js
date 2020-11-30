@@ -60,12 +60,17 @@ require(
     });
 
     function cargar(_params_url){
+      _params_url = "ubigeo=150101";
+      console.log(_params_url); 
       var cod_dist  = _params_url.split('=')[1];
       cargarDatos(cod_dist);
     } 
 
     function cargarDatos(cod_dist){
-        var sql = fcoddist+" = '"+cod_dist+"'";
+        let cod_distrito = cod_dist;
+        let nombre_distrito = "";
+        let list_codOsinerg = [];
+        var sql = fcoddist+" = '"+cod_distrito+"'";
         console.log(sql);
         var query = new QueryTask({url:url_ok_georef});
         var params = new Query;
@@ -94,6 +99,7 @@ require(
               var direccion = atributos[fdireccion];
               var actividad = atributos[factividad];
               console.log(departamento);
+              list_codOsinerg.push("'"+codOsinergmin+"'");
               tabla.append(`<tr>
                               <td>${departamento}</td>
                               <td>${provincia}</td>
@@ -107,7 +113,8 @@ require(
                             </tr>`);
             }
           }
-            var sql2 = fcoddist+" = '"+cod_dist+"'";
+            nombre_distrito = distrito;
+            var sql2 = fcoddist+" = '"+cod_distrito+"' and codigo_osinerg not in ("+list_codOsinerg+")";
             console.log(sql2);
             var query2 = new QueryTask({url:url_mal_georef});
             var params2 = new Query;
@@ -117,8 +124,53 @@ require(
             return query2.execute(params2);
         }).then(function(response){
           console.log(response);
+          console.log("nombre de distritooooo",nombre_distrito);
+          list_codOsinerg =[];
           if(response.features.length === 0){
-            exportar(cod_dist);
+             console.log("sin registros");
+          }else{
+            var registros = response.features;
+            var tabla = $("#tbl_datos");
+            for (var i = 0; i < registros.length; i++) {
+              var atributos = registros[i].attributes;
+              var departamento = atributos[fnombdepart];
+              var provincia = atributos[fnombprov];
+              var distrito = atributos[fnombdist];
+              var codOsinergmin = atributos[fcodosinergmin];
+              var regHidroc = atributos[fregisthidroc];
+              var rsocial = atributos[frsocial];
+              var direccion = atributos[fdireccion];
+              var actividad = atributos[factividad];
+              list_codOsinerg.push("'"+codOsinergmin+"'");
+              console.log(departamento);
+              tabla.append(`<tr>
+                              <td>${departamento}</td>
+                              <td>${provincia}</td>
+                              <td>${distrito}</td>
+                              <td>${codOsinergmin}</td>
+                              <td>${regHidroc}</td>
+                              <td>${rsocial}</td>
+                              <td>${direccion}</td>
+                              <td>${actividad}</td>
+                              <td>EN PROCESO</td>
+                            </tr>`);
+            }
+          }
+
+            var sql3 = "ubigeo_id = '"+cod_distrito+"' and codigo_osinerg not in ("+list_codOsinerg+")";
+            console.log(sql3);
+            var query3 = new QueryTask({url:url_no_georef});
+            var params3 = new Query;
+            params3.returnGeometry = false;
+            params3.outFields = ["*"];
+            params3.where = sql3;
+            return query3.execute(params3);
+        }).then(function(response){
+          console.log(response);
+          if(response.features.length === 0){
+              console.log("sin registros");
+              console.log(nombre_distrito);
+              return exportar(nombre_distrito);
           }else{
             var registros = response.features;
             var tabla = $("#tbl_datos");
@@ -146,7 +198,8 @@ require(
                             </tr>`);
             }
           }
-          exportar(distrito);
+          console.log(nombre_distrito);
+          return exportar(nombre_distrito);
         })
     }
 

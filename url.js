@@ -60,8 +60,7 @@ require(
     });
 
     function cargar(_params_url){
-      console.log("parametro",_params_url); 
-
+      console.log(_params_url); 
       var cod_dist  = _params_url.split('=')[1];
       cargarDatos(cod_dist);
     } 
@@ -124,7 +123,6 @@ require(
             return query2.execute(params2);
         }).then(function(response){
           console.log(response);
-          console.log("nombre de distritooooo",nombre_distrito);
           list_codOsinerg =[];
           if(response.features.length === 0){
              console.log("sin registros");
@@ -169,8 +167,6 @@ require(
           console.log(response);
           if(response.features.length === 0){
               console.log("sin registros");
-              console.log(nombre_distrito);
-              return exportar(nombre_distrito);
           }else{
             var registros = response.features;
             var tabla = $("#tbl_datos");
@@ -198,7 +194,7 @@ require(
                             </tr>`);
             }
           }
-          console.log(nombre_distrito);
+          console.log("nombre de distrito",nombre_distrito);
           return exportar(nombre_distrito);
         })
     }

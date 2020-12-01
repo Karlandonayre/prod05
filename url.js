@@ -52,6 +52,10 @@ require(
     var fcodosinergmin = "codigo_osinerg";
     var festado = "coincide_dist";
 
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();   
+    });
+    
     $("#btn_export").on('click', function(){
       let urlparams = window.location.search
       _params_url = urlparams.substring(1);
@@ -202,9 +206,9 @@ require(
             var tabla = $("#tbl_datos");
             for (var i = 0; i < registros.length; i++) {
               var atributos = registros[i].attributes;
-              var departamento = atributos["nomdepa"];
-              var provincia = atributos["nomprov"];
-              var distrito = atributos["nomdist"];
+              var departamento = atributos[fnombdepart];
+              var provincia = atributos[fnombprov];
+              var distrito = atributos[fnombdist];
               var codOsinergmin = atributos[fcodosinergmin];
               var regHidroc = atributos[fregisthidroc];
               var rsocial = atributos[frsocial];

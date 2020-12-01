@@ -69,6 +69,9 @@ require(
         let cod_distrito = cod_dist;
         let nombre_distrito = "";
         let list_codOsinerg = [];
+        let progreso = 0;
+        let cant = 0;
+        let total = 0;
         var sql = fcoddist+" = '"+cod_distrito+"'";
         console.log(sql);
         var query = new QueryTask({url:url_ok_georef});
@@ -87,6 +90,8 @@ require(
           }else{
             var registros = response.features;
             var tabla = $("#tbl_datos").html("");
+            $(".lbl-progreso").css("display","inline-block");
+
             for (var i = 0; i < registros.length; i++) {
               var atributos = registros[i].attributes;
               var departamento = atributos[fnombdepart];
@@ -110,6 +115,13 @@ require(
                               <td>${actividad}</td>
                               <td>SI</td>
                             </tr>`);
+              cant = cant + 1;
+              total = registros.length;
+              var porcentaje = 50;
+              progreso = (cant * porcentaje)/total
+              $("#progreso").css("width", `${progreso}%`);
+              $("#porcentaje").html(`${progreso}%`);
+              console.log(progreso+"%");
             }
           }
             nombre_distrito = distrito;
@@ -123,6 +135,7 @@ require(
             return query2.execute(params2);
         }).then(function(response){
           console.log(response);
+          total = total + response.features.length;
           list_codOsinerg =[];
           if(response.features.length === 0){
              console.log("sin registros");
@@ -152,6 +165,13 @@ require(
                               <td>${actividad}</td>
                               <td>EN PROCESO</td>
                             </tr>`);
+
+              cant = cant + 1;              
+              var porcentaje = 70;
+              progreso = cant * porcentaje/total;
+              console.log(progreso+"%");  
+              $("#progreso").css("width", `${progreso}%`);
+              $("#porcentaje").html(`${progreso}%`);
             }
           }
 
@@ -165,9 +185,14 @@ require(
             return query3.execute(params3);
         }).then(function(response){
           console.log(response);
+          total = total + response.features.length;
           if(response.features.length === 0){
               console.log("sin registros");
-          }else{
+              progreso = 100;
+              console.log(progreso+"%");
+              $("#progreso").css("width", `${progreso}%`);
+              $("#porcentaje").html(`${progreso}%`);
+          }else{            
             var registros = response.features;
             var tabla = $("#tbl_datos");
             for (var i = 0; i < registros.length; i++) {
@@ -192,10 +217,18 @@ require(
                               <td>${actividad}</td>
                               <td>EN PROCESO</td>
                             </tr>`);
+
+              cant = cant + 1;              
+              var porcentaje = 100;
+              progreso = cant * porcentaje/total;
+              console.log(progreso+"%");
+              $("#progreso").css("width", `${progreso}%`);
+              $("#porcentaje").html(`${progreso}%`);
             }
           }
           console.log("nombre de distrito",nombre_distrito);
-          return exportar(nombre_distrito);
+          $(".lbl-progreso").css("display","none");
+          exportar(nombre_distrito);
         })
     }
 

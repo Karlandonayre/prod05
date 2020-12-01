@@ -15,10 +15,32 @@ body{
 	align-content: center;
 	color: white;
 	text-align: center;
+	position: relative;
 }
 .btn{
 	font-size: 11px;
 }
 hr{
 	background: white;
+}
+#progressbar { 
+    background-color: #20201F; 
+    border-radius: 20px; /* (heightOfInnerDiv/2) + padding */ 
+    padding: 4px; 
+    
+} 
+#progreso{
+	background-color: #F7901E; 
+    width: 48%; /* Adjust with JavaScript */ 
+    height: 16px; 
+    border-radius: 10px;     
+}
+#porcentaje{
+	top:1%;
+	left: 1px;
+	position: absolute;
+}
+.lbl-progreso{
+	display: none;
+	width: 100%;
 }

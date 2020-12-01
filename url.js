@@ -72,7 +72,8 @@ require(
         let progreso = 0;
         let cant = 0;
         let total = 0;
-        var sql = fcoddist+" = '"+cod_distrito+"'";
+        let sql = "";
+        sql = fcoddist+" = '"+cod_distrito+"'";
         console.log(sql);
         var query = new QueryTask({url:url_ok_georef});
         var params = new Query;
@@ -83,6 +84,7 @@ require(
           console.log(response);
           if(response.features.length === 0){
             console.log("sin registros");
+            sql2 = fcoddist+" = '"+cod_distrito+"'";
             $("#mensaje").css('display', 'block');
             $("#mensaje").fadeOut(4000);
             $("#mensaje").show();
@@ -123,9 +125,10 @@ require(
               $("#porcentaje").html(`${progreso}%`);
               console.log(progreso+"%");
             }
+            sql2 = fcoddist+" = '"+cod_distrito+"' and codigo_osinerg not in ("+list_codOsinerg+")";
           }
             nombre_distrito = distrito;
-            var sql2 = fcoddist+" = '"+cod_distrito+"' and codigo_osinerg not in ("+list_codOsinerg+")";
+            
             console.log(sql2);
             var query2 = new QueryTask({url:url_mal_georef});
             var params2 = new Query;
@@ -139,6 +142,7 @@ require(
           list_codOsinerg =[];
           if(response.features.length === 0){
              console.log("sin registros");
+             sql3 = "ubigeo_id = '"+cod_distrito+"'";
           }else{
             var registros = response.features;
             var tabla = $("#tbl_datos");
@@ -173,9 +177,10 @@ require(
               $("#progreso").css("width", `${progreso}%`);
               $("#porcentaje").html(`${progreso}%`);
             }
+            sql3 = "ubigeo_id = '"+cod_distrito+"' and codigo_osinerg not in ("+list_codOsinerg+")";
           }
 
-            var sql3 = "ubigeo_id = '"+cod_distrito+"' and codigo_osinerg not in ("+list_codOsinerg+")";
+            
             console.log(sql3);
             var query3 = new QueryTask({url:url_no_georef});
             var params3 = new Query;

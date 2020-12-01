@@ -202,9 +202,9 @@ require(
             var tabla = $("#tbl_datos");
             for (var i = 0; i < registros.length; i++) {
               var atributos = registros[i].attributes;
-              var departamento = atributos[fnombdepart];
-              var provincia = atributos[fnombprov];
-              var distrito = atributos[fnombdist];
+              var departamento = atributos["nomdepa"];
+              var provincia = atributos["nomprov"];
+              var distrito = atributos["nomdist"];
               var codOsinergmin = atributos[fcodosinergmin];
               var regHidroc = atributos[fregisthidroc];
               var rsocial = atributos[frsocial];

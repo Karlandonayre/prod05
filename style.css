@@ -5,16 +5,16 @@ body{
 	padding: 0 40px;
 }
 #mensaje{
-	display: none;
-	
+	display: none;	
 }
 .div-boton{
-		background: black;
-		width: 100%;
-		height: 60px;
-		align-content: center;
-		color: white;
-		text-align: center;
+	margin-top: 5px;
+	background: black;
+	width: 100%;
+	height: 60px;
+	align-content: center;
+	color: white;
+	text-align: center;
 }
 .btn{
 	font-size: 11px;

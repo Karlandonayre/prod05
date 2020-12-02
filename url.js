@@ -30,9 +30,6 @@ require(
       proxyUrl: _proxyurl2
     });
     //servicio prueba
-    //var url_prueba = "https://services6.arcgis.com/qHdoJI2FoNfsEzow/ArcGIS/rest/services/tabla_servicio_dash/FeatureServer/0";
-    var url_prueba = "https://services5.arcgis.com/oAvs2fapEemUpOTy/arcgis/rest/services/FS_LyOper_LVGLP_v04/FeatureServer/0";
-    
     var url_mal_georef = "https://gisem.osinergmin.gob.pe/serverdc/rest/services/Prueba/LVGLP_total_test/FeatureServer/0";
     var url_ok_georef = "https://gisem.osinergmin.gob.pe/serverdc/rest/services/Prueba/LVGLP_total_test/FeatureServer/1";
     var url_no_georef = "https://gisem.osinergmin.gob.pe/serverdc/rest/services/Prueba/LVGLP_total_test/FeatureServer/5";
@@ -53,7 +50,7 @@ require(
     var festado = "coincide_dist";
 
     $(document).ready(function(){
-      $('[data-toggle="tooltip"]').tooltip();   
+      $('[data-toggle="tooltip"]').tooltip();  
     });
     
     $("#btn_export").on('click', function(){

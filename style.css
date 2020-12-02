@@ -15,11 +15,11 @@ body{
 	align-content: center;
 	color: white;
 	text-align: center;
-	position: relative;
 }
-.btn{
-	font-size: 11px;
+.btn-exportar{
+	font-size: 12px;
 }
+
 hr{
 	background: white;
 }
@@ -45,3 +45,22 @@ hr{
 	width: 100%;
 }
 
+.tooltip-inner {
+  max-width: 14em !important;
+  height: 4em;
+  font-size: 10px;
+  padding: 5px 15px 10px 20px;
+  background: black;
+  color: #ffff;
+  text-align: center;
+}
+
+.tooltip.show {
+  opacity: 1;
+}
+
+.bs-tooltip-auto[x-placement^=bottom] .arrow::before,
+.bs-tooltip-bottom .arrow::before {
+  border-bottom-color: black;
+  /* Red */
+}

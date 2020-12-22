@@ -30,9 +30,9 @@ require(
       proxyUrl: _proxyurl2
     });
     //servicio prueba
-    var url_mal_georef = "https://gisem.osinergmin.gob.pe/serverdc/rest/services/Prueba/LVGLP_total_test/FeatureServer/0";
-    var url_ok_georef = "https://gisem.osinergmin.gob.pe/serverdc/rest/services/Prueba/LVGLP_total_test/FeatureServer/1";
-    var url_no_georef = "https://gisem.osinergmin.gob.pe/serverdc/rest/services/Prueba/LVGLP_total_test/FeatureServer/5";
+    var url_mal_georef = "https://gisem.osinergmin.gob.pe/serverdc/rest/services/Prueba/LVGLP_total/FeatureServer/0";
+    var url_ok_georef = "https://gisem.osinergmin.gob.pe/serverdc/rest/services/Prueba/LVGLP_total/FeatureServer/1";
+    var url_no_georef = "https://gisem.osinergmin.gob.pe/serverdc/rest/services/Prueba/LVGLP_total/FeatureServer/5";
 
     //Fields
     var fobjectid = "objectid";
@@ -61,7 +61,6 @@ require(
     });
 
     function cargar(_params_url){
-      console.log(_params_url); 
       var cod_dist  = _params_url.split('=')[1];
       cargarDatos(cod_dist);
     } 
@@ -75,14 +74,14 @@ require(
         let total = 0;
         let sql = "";
         sql = fcoddist+" = '"+cod_distrito+"'";
-        console.log(sql);
+        
         var query = new QueryTask({url:url_ok_georef});
         var params = new Query;
         params.returnGeometry = false;
         params.outFields = ["*"];
         params.where = sql;
         query.execute(params).then(function(response){
-          console.log(response);
+          
           if(response.features.length === 0){
             console.log("sin registros");
             sql2 = fcoddist+" = '"+cod_distrito+"'";
@@ -105,7 +104,7 @@ require(
               var rsocial = atributos[frsocial];
               var direccion = atributos[fdireccion];
               var actividad = atributos[factividad];
-              console.log(departamento);
+              
               list_codOsinerg.push("'"+codOsinergmin+"'");
               tabla.append(`<tr>
                               <td>${departamento}</td>
@@ -130,7 +129,6 @@ require(
           }
             nombre_distrito = distrito;
             
-            console.log(sql2);
             var query2 = new QueryTask({url:url_mal_georef});
             var params2 = new Query;
             params2.returnGeometry = false;
@@ -138,7 +136,6 @@ require(
             params2.where = sql2;
             return query2.execute(params2);
         }).then(function(response){
-          console.log(response);
           total = total + response.features.length;
           list_codOsinerg =[];
           if(response.features.length === 0){
@@ -158,7 +155,7 @@ require(
               var direccion = atributos[fdireccion];
               var actividad = atributos[factividad];
               list_codOsinerg.push("'"+codOsinergmin+"'");
-              console.log(departamento);
+
               tabla.append(`<tr>
                               <td>${departamento}</td>
                               <td>${provincia}</td>
@@ -182,7 +179,6 @@ require(
           }
 
             
-            console.log(sql3);
             var query3 = new QueryTask({url:url_no_georef});
             var params3 = new Query;
             params3.returnGeometry = false;
@@ -190,7 +186,6 @@ require(
             params3.where = sql3;
             return query3.execute(params3);
         }).then(function(response){
-          console.log(response);
           total = total + response.features.length;
           if(response.features.length === 0){
               console.log("sin registros");
@@ -211,7 +206,7 @@ require(
               var rsocial = atributos[frsocial];
               var direccion = atributos[fdireccion];
               var actividad = atributos[factividad];
-              console.log(departamento);
+
               tabla.append(`<tr>
                               <td>${departamento}</td>
                               <td>${provincia}</td>
@@ -232,7 +227,6 @@ require(
               $("#porcentaje").html(`${progreso}%`);
             }
           }
-          console.log("nombre de distrito",nombre_distrito);
           $(".lbl-progreso").css("display","none");
           exportar(nombre_distrito);
         })

@@ -25,13 +25,13 @@ hr{
 }
 #progressbar { 
     background-color: #20201F; 
-    border-radius: 20px; /* (heightOfInnerDiv/2) + padding */ 
+    border-radius: 20px; 
     padding: 4px; 
     
 } 
 #progreso{
 	background-color: #F7901E; 
-    width: 48%; /* Adjust with JavaScript */ 
+    width: 48%; 
     height: 16px; 
     border-radius: 10px;     
 }
@@ -62,5 +62,4 @@ hr{
 .bs-tooltip-auto[x-placement^=bottom] .arrow::before,
 .bs-tooltip-bottom .arrow::before {
   border-bottom-color: black;
-  /* Red */
 }

@@ -38,9 +38,9 @@ require(
     var fobjectid = "objectid";
     var fregisthidroc = "cdgo_dgh";
     var frsocial = "razon";
-    var fnombdepart = "nomdepartamento";
-    var fnombprov = "nomprovincia";
-    var fnombdist = "nomdistrito";
+    var fnomdepa = "nomdepa";
+    var fnomprov = "nomprov";
+    var fnomdist = "nomdist";
     var fdireccion = "direccion";
     var factividad = "actividad";
     var fcoddepart = "coddepartamento";
@@ -96,9 +96,9 @@ require(
 
             for (var i = 0; i < registros.length; i++) {
               var atributos = registros[i].attributes;
-              var departamento = (atributos[fnombdepart] != null) ? atributos[fnombdepart] : "" ;
-              var provincia = (atributos[fnombprov] != null) ? atributos[fnombprov] : "";
-              var distrito = (atributos[fnombdist] != null) ? atributos[fnombdist] : "";
+              var departamento = (atributos[fnomdepa] != null) ? atributos[fnomdepa] : "" ;
+              var provincia = (atributos[fnomprov] != null) ? atributos[fnomprov] : "";
+              var distrito = (atributos[fnomdist] != null) ? atributos[fnomdist] : "";
               var codOsinergmin = atributos[fcodosinergmin];
               var regHidroc = atributos[fregisthidroc];
               var rsocial = atributos[frsocial];
@@ -146,9 +146,9 @@ require(
             var tabla = $("#tbl_datos");
             for (var i = 0; i < registros.length; i++) {
               var atributos = registros[i].attributes;
-              var departamento = (atributos[fnombdepart] != null) ? atributos[fnombdepart] : "" ;
-              var provincia = (atributos[fnombprov] != null) ? atributos[fnombprov] : "";
-              var distrito = (atributos[fnombdist] != null) ? atributos[fnombdist] : "";
+              var departamento = (atributos[fnomdepa] != null) ? atributos[fnomdepa] : "" ;
+              var provincia = (atributos[fnomprov] != null) ? atributos[fnomprov] : "";
+              var distrito = (atributos[fnomdist] != null) ? atributos[fnomdist] : "";
               var codOsinergmin = atributos[fcodosinergmin];
               var regHidroc = atributos[fregisthidroc];
               var rsocial = atributos[frsocial];
@@ -198,9 +198,9 @@ require(
             var tabla = $("#tbl_datos");
             for (var i = 0; i < registros.length; i++) {
               var atributos = registros[i].attributes;
-              var departamento = (atributos[fnombdepart] != null) ? atributos[fnombdepart] : "" ;
-              var provincia = (atributos[fnombprov] != null) ? atributos[fnombprov] : "";
-              var distrito = (atributos[fnombdist] != null) ? atributos[fnombdist] : "";
+              var departamento = (atributos[fnomdepa] != null) ? atributos[fnomdepa] : "" ;
+              var provincia = (atributos[fnomprov] != null) ? atributos[fnomprov] : "";
+              var distrito = (atributos[fnomdist] != null) ? atributos[fnomdist] : "";
               var codOsinergmin = atributos[fcodosinergmin];
               var regHidroc = atributos[fregisthidroc];
               var rsocial = atributos[frsocial];

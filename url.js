@@ -137,7 +137,6 @@ require(
             return query2.execute(params2);
         }).then(function(response){
           total = total + response.features.length;
-          list_codOsinerg =[];
           if(response.features.length === 0){
              console.log("sin registros");
              sql3 = "ubigeo_id = '"+cod_distrito+"'";

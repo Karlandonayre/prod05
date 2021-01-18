@@ -73,7 +73,7 @@ require(
             let total = 0;
             let sql = "";
             sql = fcoddist + " = '" + cod_distrito + "'";
-
+            console.log("primer sql ",sql)
             var query = new QueryTask({ url: url_ok_georef });
             var params = new Query;
             params.returnGeometry = false;
@@ -84,6 +84,7 @@ require(
                 if (response.features.length === 0) {
                     console.log("sin registros");
                     sql2 = fcoddist + " = '" + cod_distrito + "'";
+                    console.log("segundo sql ",sql2)
                     $("#mensaje").css('display', 'block');
                     $("#mensaje").fadeOut(4000);
                     $("#mensaje").show();
@@ -125,6 +126,7 @@ require(
                         console.log(progreso + "%");
                     }
                     sql2 = fcoddist + " = '" + cod_distrito + "' and "+fcodosinergmin+" not in (" + list_codOsinerg + ")";
+                    console.log("sql2 con datos ",sql2)
                 }
                 nombre_distrito = distrito;
 
@@ -139,6 +141,7 @@ require(
                 if (response.features.length === 0) {
                     console.log("sin registros");
                     sql3 = fcoddist + " = '" + cod_distrito + "'";
+                    console.log("sql3 ",sql3)
                 } else {
                     var registros = response.features;
                     var tabla = $("#tbl_datos");
@@ -174,6 +177,7 @@ require(
                         $("#porcentaje").html(`${progreso}%`);
                     }
                     sql3 = fcoddist + " = '" + cod_distrito + "' and "+fcodosinergmin+" not in (" + list_codOsinerg + ")";
+                    console.log("sql3 con datos ",sql3)
                 }
 
 

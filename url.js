@@ -140,7 +140,7 @@ require(
                 total = total + response.features.length;
                 if (response.features.length === 0) {
                     console.log("sin registros");
-                    sql3 = fcoddist + " = '" + cod_distrito + "'";
+                    sql3 = "UBIGEO_ID = '" + cod_distrito + "'";
                     console.log("sql3 ",sql3)
                 } else {
                     var registros = response.features;
@@ -176,7 +176,7 @@ require(
                         $("#progreso").css("width", `${progreso}%`);
                         $("#porcentaje").html(`${progreso}%`);
                     }
-                    sql3 = fcoddist + " = '" + cod_distrito + "' and "+fcodosinergmin+" not in (" + list_codOsinerg + ")";
+                    sql3 = "UBIGEO_ID = '" + cod_distrito + "' and "+fcodosinergmin+" not in (" + list_codOsinerg + ")";
                     console.log("sql3 con datos ",sql3)
                 }
 

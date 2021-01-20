@@ -23,10 +23,10 @@ require(
     ) {
         $("#mensaje").hide();
 
-        // _proxyurl2 = "https://proxy-esri.herokuapp.com/proxy.php"; //palomino
+        // _proxyurl2 = "https://proxy-esri.herokuapp.com/proxy.php";
 
         // urlUtils.addProxyRule({
-        //   urlPrefix: "https://gisem.osinergmin.gob.pe/serverdc/rest/services",
+        //   urlPrefix: "https://services5.arcgis.com/oAvs2fapEemUpOTy/ArcGIS/rest/services",
         //   proxyUrl: _proxyurl2
         // });
         //servicio prueba

@@ -60,12 +60,11 @@ require(
             // cargar(_params_url);
             let params = new URLSearchParams(location.search);
             var cod_dist = params.get('UBIGEO');
-            var nom_dist = params.get('NOMUBIGEO');
+            __nombre_distrito  = params.get('NOMUBIGEO');
+           
             
             // let cod_dist = getParameterByName("UBIGEO");
             // let nom_dist = getParameterByName("NOMUBIGEO");
-            console.log(cod_dist);
-            console.log(nom_dist);
             cargarDatos(cod_dist);
         });
 
@@ -83,7 +82,7 @@ require(
 
         function cargarDatos(cod_dist) {
             let cod_distrito = cod_dist;
-            let nombre_distrito = nom_dist;
+            let nombre_distrito = __nombre_distrito;
             let list_codOsinerg = [];
             let progreso = 0;
             let cant = 0;

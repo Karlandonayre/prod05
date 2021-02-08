@@ -29,13 +29,13 @@ require(
         //   urlPrefix: "https://services5.arcgis.com/oAvs2fapEemUpOTy/ArcGIS/rest/services",
         //   proxyUrl: _proxyurl2
         // });
-        //servicio prueba
+
+        //servicios de información
         var url_mal_georef = "https://services5.arcgis.com/oAvs2fapEemUpOTy/ArcGIS/rest/services/ResultadosXY2LVGLP/FeatureServer/2";
         var url_ok_georef = "https://services5.arcgis.com/oAvs2fapEemUpOTy/ArcGIS/rest/services/ResultadosXY2LVGLP/FeatureServer/3";
         var url_no_georef = "https://services5.arcgis.com/oAvs2fapEemUpOTy/ArcGIS/rest/services/ResultadosXY2LVGLP/FeatureServer/5";
 
         //Fields
-        var fobjectid = "OBJECTID";
         var fregisthidroc = "CDGO_DGH";
         var frsocial = "RAZON";
         var fnomdepa = "NOMDEPA";
@@ -43,10 +43,11 @@ require(
         var fnomdist = "NOMDIST";
         var fdireccion = "DIRECCION";
         var factividad = "ACTIVIDAD";
-        var fcoddepart = "CODDEPARTAMENTO";
-        var fcodprov = "CODPROVINCIA";
         var fcoddist = "Ubigeo_ID_txt";
         var fcodosinergmin = "CODIGO_OSINERG";
+        var fcodUbigNo = "UBIGEO_ID"; //Field de No georeferenciados
+
+        var __nombre_distrito = "";
 
         $(document).ready(function() {
             $('[data-toggle="tooltip"]').tooltip();
@@ -61,19 +62,20 @@ require(
 
         function cargar(_params_url) {
             var cod_dist = _params_url.split('=')[1];
+            __nombre_distrito = _params_url.split('=')[3];
             cargarDatos(cod_dist);
         }
 
         function cargarDatos(cod_dist) {
             let cod_distrito = cod_dist;
-            let nombre_distrito = "";
+            let nombre_distrito = __nombre_distrito;
             let list_codOsinerg = [];
             let progreso = 0;
             let cant = 0;
             let total = 0;
             let sql = "";
             sql = fcoddist + " = '" + cod_distrito + "'";
-            console.log("primer sql ",sql)
+            console.log("primer sql ", sql)
             var query = new QueryTask({ url: url_ok_georef });
             var params = new Query;
             params.returnGeometry = false;
@@ -84,7 +86,7 @@ require(
                 if (response.features.length === 0) {
                     console.log("sin registros");
                     sql2 = fcoddist + " = '" + cod_distrito + "'";
-                    console.log("segundo sql ",sql2)
+                    console.log("segundo sql ", sql2)
                     $("#mensaje").css('display', 'block');
                     $("#mensaje").fadeOut(4000);
                     $("#mensaje").show();
@@ -125,10 +127,9 @@ require(
                         $("#porcentaje").html(`${progreso}%`);
                         console.log(progreso + "%");
                     }
-                    sql2 = fcoddist + " = '" + cod_distrito + "' and "+fcodosinergmin+" not in (" + list_codOsinerg + ")";
-                    console.log("sql2 con datos ",sql2)
+                    sql2 = fcoddist + " = '" + cod_distrito + "' and " + fcodosinergmin + " not in (" + list_codOsinerg + ")";
+                    console.log("sql2 con datos ", sql2)
                 }
-                nombre_distrito = distrito;
 
                 var query2 = new QueryTask({ url: url_mal_georef });
                 var params2 = new Query;
@@ -140,8 +141,8 @@ require(
                 total = total + response.features.length;
                 if (response.features.length === 0) {
                     console.log("sin registros");
-                    sql3 = "UBIGEO_ID = '" + cod_distrito + "'";
-                    console.log("sql3 ",sql3)
+                    sql3 = fcodUbigNo + " = '" + cod_distrito + "'";
+                    console.log("sql3 ", sql3)
                 } else {
                     var registros = response.features;
                     var tabla = $("#tbl_datos");
@@ -176,8 +177,8 @@ require(
                         $("#progreso").css("width", `${progreso}%`);
                         $("#porcentaje").html(`${progreso}%`);
                     }
-                    sql3 = "UBIGEO_ID = '" + cod_distrito + "' and "+fcodosinergmin+" not in (" + list_codOsinerg + ")";
-                    console.log("sql3 con datos ",sql3)
+                    sql3 = fcodUbigNo + " = '" + cod_distrito + "' and " + fcodosinergmin + " not in (" + list_codOsinerg + ")";
+                    console.log("sql3 con datos ", sql3)
                 }
 
 

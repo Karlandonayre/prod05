@@ -58,8 +58,12 @@ require(
             // _params_url = urlparams.substring(1);
             // (_params_url == undefined || _params_url == ' ') ? _params_url = "undefined": "";
             // cargar(_params_url);
-            let cod_dist = getParameterByName("UBIGEO");
-            let nom_dist = getParameterByName("NOMUBIGEO");
+            let params = new URLSearchParams(location.search);
+            var cod_dist = params.get('UBIGEO');
+            var nom_dist = params.get('NOMUBIGEO');
+            
+            // let cod_dist = getParameterByName("UBIGEO");
+            // let nom_dist = getParameterByName("NOMUBIGEO");
             console.log(cod_dist);
             console.log(nom_dist);
             cargarDatos(cod_dist);
@@ -254,11 +258,11 @@ require(
             return false;
         }
 
-        function getParameterByName(name) {​​
-            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
-            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-        }​​
+        // function getParameterByName(name){​​
+        //     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        //     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        //     results = regex.exec(location.search);
+        //     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        // }​​
 
-    })
+    });

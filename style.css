@@ -6,6 +6,7 @@ body{
 }
 #mensaje{
 	display: none;	
+	font-size: 10px;
 }
 .div-boton{
 	margin-top: 20px;

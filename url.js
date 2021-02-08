@@ -54,20 +54,28 @@ require(
         });
 
         $("#btn_export").on('click', function() {
-            let urlparams = window.location.search
-            _params_url = urlparams.substring(1);
-            (_params_url == undefined || _params_url == ' ') ? _params_url = "undefined": "";
-            cargar(_params_url);
+            // let urlparams = window.location.search
+            // _params_url = urlparams.substring(1);
+            // (_params_url == undefined || _params_url == ' ') ? _params_url = "undefined": "";
+            // cargar(_params_url);
+            let cod_dist = getParameterByName("UBIGEO");
+            let nom_dist = getParameterByName("NOMUBIGEO");
+            console.log(cod_dist);
+            console.log(nom_dist);
+            cargarDatos(cod_dist);
         });
 
-        function cargar(_params_url) {
-            var param_ubigeo = _params_url.split('&')[0];
-            var param_distrito = _params_url.split('&')[1];
+        // function cargar(_params_url) {
+        //     var param_ubigeo = _params_url.split('&')[0];
+        //     var param_distrito = _params_url.split('&')[1];
 
-            var cod_dist = param_ubigeo.split('=')[1];
-            __nombre_distrito = param_distrito.split('=')[1];
-            cargarDatos(cod_dist);
-        }
+        //     var cod_dist = param_ubigeo.split('=')[1];
+        //     __nombre_distrito = param_distrito.split('=')[1];
+
+        //     // getParameterByName(__nombre_distrito);
+
+        //     // cargarDatos(cod_dist);
+        // }
 
         function cargarDatos(cod_dist) {
             let cod_distrito = cod_dist;
@@ -245,5 +253,12 @@ require(
             Exporter.export($tbldatos, filename, 'Locales de venta LGVL');
             return false;
         }
+
+        function getParameterByName(name) {​​
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }​​
 
     })

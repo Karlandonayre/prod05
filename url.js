@@ -61,8 +61,11 @@ require(
         });
 
         function cargar(_params_url) {
-            var cod_dist = _params_url.split('=')[1];
-            __nombre_distrito = _params_url.split('=')[3];
+            var param_ubigeo = _params_url.split('&')[0];
+            var param_distrito = _params_url.split('&')[1];
+
+            var cod_dist = param_ubigeo.split('=')[1];
+            __nombre_distrito = param_distrito.split('=')[1];
             cargarDatos(cod_dist);
         }
 

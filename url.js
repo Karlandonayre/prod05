@@ -83,7 +83,7 @@ require(
 
         function cargarDatos(cod_dist) {
             let cod_distrito = cod_dist;
-            let nombre_distrito = __nombre_distrito;
+            let nombre_distrito = nom_dist;
             let list_codOsinerg = [];
             let progreso = 0;
             let cant = 0;

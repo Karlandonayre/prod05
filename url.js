@@ -22,15 +22,9 @@ require(
         urlUtils
     ) {
         $("#mensaje").hide();
+       
 
-        // _proxyurl2 = "https://proxy-esri.herokuapp.com/proxy.php";
-
-        // urlUtils.addProxyRule({
-        //   urlPrefix: "https://services5.arcgis.com/oAvs2fapEemUpOTy/ArcGIS/rest/services",
-        //   proxyUrl: _proxyurl2
-        // });
-
-        //servicios de información
+        //Servicios de información
         var url_mal_georef = "https://services5.arcgis.com/oAvs2fapEemUpOTy/ArcGIS/rest/services/ResultadosXY2LVGLP/FeatureServer/2";
         var url_ok_georef = "https://services5.arcgis.com/oAvs2fapEemUpOTy/ArcGIS/rest/services/ResultadosXY2LVGLP/FeatureServer/3";
         var url_no_georef = "https://services5.arcgis.com/oAvs2fapEemUpOTy/ArcGIS/rest/services/ResultadosXY2LVGLP/FeatureServer/5";
@@ -53,32 +47,13 @@ require(
             $('[data-toggle="tooltip"]').tooltip();
         });
 
-        $("#btn_export").on('click', function() {
-            // let urlparams = window.location.search
-            // _params_url = urlparams.substring(1);
-            // (_params_url == undefined || _params_url == ' ') ? _params_url = "undefined": "";
-            // cargar(_params_url);
+        $("#btn_export").on('click', function() {            
             let params = new URLSearchParams(location.search);
             var cod_dist = params.get('UBIGEO');
             __nombre_distrito  = params.get('NOMUBIGEO');
-           
-            
-            // let cod_dist = getParameterByName("UBIGEO");
-            // let nom_dist = getParameterByName("NOMUBIGEO");
             cargarDatos(cod_dist);
         });
-
-        // function cargar(_params_url) {
-        //     var param_ubigeo = _params_url.split('&')[0];
-        //     var param_distrito = _params_url.split('&')[1];
-
-        //     var cod_dist = param_ubigeo.split('=')[1];
-        //     __nombre_distrito = param_distrito.split('=')[1];
-
-        //     // getParameterByName(__nombre_distrito);
-
-        //     // cargarDatos(cod_dist);
-        // }
+     
 
         function cargarDatos(cod_dist) {
             let cod_distrito = cod_dist;
@@ -89,7 +64,6 @@ require(
             let total = 0;
             let sql = "";
             sql = fcoddist + " = '" + cod_distrito + "'";
-            console.log("primer sql ", sql)
             var query = new QueryTask({ url: url_ok_georef });
             var params = new Query;
             params.returnGeometry = false;
@@ -100,7 +74,6 @@ require(
                 if (response.features.length === 0) {
                     console.log("sin registros");
                     sql2 = fcoddist + " = '" + cod_distrito + "'";
-                    console.log("segundo sql ", sql2)
                     $("#mensaje").css('display', 'block');
                     $("#mensaje").fadeOut(4000);
                     $("#mensaje").show();
@@ -139,10 +112,8 @@ require(
                         progreso = (cant * porcentaje) / total
                         $("#progreso").css("width", `${progreso}%`);
                         $("#porcentaje").html(`${progreso}%`);
-                        console.log(progreso + "%");
                     }
                     sql2 = fcoddist + " = '" + cod_distrito + "' and " + fcodosinergmin + " not in (" + list_codOsinerg + ")";
-                    console.log("sql2 con datos ", sql2)
                 }
 
                 var query2 = new QueryTask({ url: url_mal_georef });
@@ -156,7 +127,6 @@ require(
                 if (response.features.length === 0) {
                     console.log("sin registros");
                     sql3 = fcodUbigNo + " = '" + cod_distrito + "'";
-                    console.log("sql3 ", sql3)
                 } else {
                     var registros = response.features;
                     var tabla = $("#tbl_datos");
@@ -187,12 +157,10 @@ require(
                         cant = cant + 1;
                         var porcentaje = 70;
                         progreso = cant * porcentaje / total;
-                        console.log(progreso + "%");
                         $("#progreso").css("width", `${progreso}%`);
                         $("#porcentaje").html(`${progreso}%`);
                     }
                     sql3 = fcodUbigNo + " = '" + cod_distrito + "' and " + fcodosinergmin + " not in (" + list_codOsinerg + ")";
-                    console.log("sql3 con datos ", sql3)
                 }
 
 
@@ -207,7 +175,6 @@ require(
                 if (response.features.length === 0) {
                     console.log("sin registros");
                     progreso = 100;
-                    console.log(progreso + "%");
                     $("#progreso").css("width", `${progreso}%`);
                     $("#porcentaje").html(`${progreso}%`);
                 } else {
@@ -239,7 +206,6 @@ require(
                         cant = cant + 1;
                         var porcentaje = 100;
                         progreso = cant * porcentaje / total;
-                        console.log(progreso + "%");
                         $("#progreso").css("width", `${progreso}%`);
                         $("#porcentaje").html(`${progreso}%`);
                     }
@@ -255,13 +221,6 @@ require(
             var $tbldatos = document.getElementById('tbl_exportar');
             Exporter.export($tbldatos, filename, 'Locales de venta LGVL');
             return false;
-        }
-
-        // function getParameterByName(name){​​
-        //     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-        //     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        //     results = regex.exec(location.search);
-        //     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-        // }​​
+        }     
 
     });
